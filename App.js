@@ -7,9 +7,12 @@ import { StackNavigator } from 'react-navigation'
 
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
-import { purple } from './utils/colors'
+import { white, purple } from './utils/colors'
 
-import Decks from './components/Decks'
+import Home from './components/Home'
+import Deck from './components/Deck'
+import AddDeck from './components/AddDeck'
+import AddCard from './components/AddCard'
 
 function CustomStatusBar ({backgroundColor, ...props}) {
   return (
@@ -20,8 +23,45 @@ function CustomStatusBar ({backgroundColor, ...props}) {
 }
 
 const Nav = StackNavigator({
-  Decks: {
-    screen: Decks,
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      title: 'Decks',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  AddDeck: {
+    screen: AddDeck,
+    navigationOptions: {
+      title: 'Add new Deck',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      title: 'Add new Card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
   },
 })
 
