@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components/native'
 import { View, ScrollView, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native'
 import { white, gray, purple } from '../utils/colors'
 

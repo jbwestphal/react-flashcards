@@ -13,6 +13,7 @@ import Home from './components/Home'
 import Deck from './components/Deck'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
+import StartQuiz from './components/StartQuiz'
 
 function CustomStatusBar ({backgroundColor, ...props}) {
   return (
@@ -46,7 +47,7 @@ const Nav = StackNavigator({
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
-      title: 'Add new Deck',
+      title: 'Add Deck',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
@@ -56,7 +57,17 @@ const Nav = StackNavigator({
   AddCard: {
     screen: AddCard,
     navigationOptions: {
-      title: 'Add new Card',
+      title: 'Add Card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  StartQuiz: {
+    screen: StartQuiz,
+    navigationOptions: {
+      title: 'Quiz',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
