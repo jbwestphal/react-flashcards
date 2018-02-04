@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, Platform, StatusBar } from 'react-native'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 // import { createStore } from 'redux'
 // import { Provider } from 'react-redux'
 // import reducer from './reducers'
-import { StackNavigator } from 'react-navigation'
 
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
@@ -23,31 +23,48 @@ function CustomStatusBar ({backgroundColor, ...props}) {
   )
 }
 
-const Nav = StackNavigator({
+const TabsNav = TabNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      title: 'Decks',
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
-    }
-  },
-
-  Deck: {
-    screen: Deck,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
-    }
+      tabBarLabel: 'Decks',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='home' size={30} color={tintColor} />
+    },
   },
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
-      title: 'Add Deck',
+      tabBarLabel: 'Add Deck',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+    },
+  },
+}, {
+  navigationOptions: {
+    header: null
+  },
+  tabBarOptions: {
+    activeTintColor: Platform.OS === 'ios' ? purple : white,
+    style: {
+      height: 56,
+      backgroundColor: Platform.OS === 'ios' ? white : purple,
+      shadowColor: 'rgba(0, 0, 0, 0.24)',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 6,
+      shadowOpacity: 1
+    }
+  }
+})
+
+const Nav = StackNavigator({
+  Home: {
+    screen: TabsNav,
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
