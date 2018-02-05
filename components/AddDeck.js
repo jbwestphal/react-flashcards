@@ -6,7 +6,7 @@ import SubmitBtn from './SubmitBtn'
 
 export default function AddDeck({ navigation }) {
   return (
-    <KeyboardAvoidingView style={styles.center}>
+    <KeyboardAvoidingView behavior='padding' style={styles.center}>
       <Text style={styles.title}>What is the title of your new deck?</Text>
       <View><FormInput containerStyle={styles.inputWrapper} inputStyle={styles.input} /></View>
       <FormValidationMessage>Insert a title</FormValidationMessage>

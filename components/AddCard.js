@@ -1,16 +1,16 @@
 import React from 'react'
-import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { View, Text, KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 
 export default function AddCard({ navigation }) {
   return (
-    <KeyboardAvoidingView style={styles.center}>
-      <Text style={styles.title}>Title Card</Text>
-      <View style={styles.inputWrapper}><FormInput /></View>
+    <KeyboardAvoidingView behavior='padding' style={styles.center}>
+      <Text style={styles.title}>Card's Title</Text>
+      <TextInput style={styles.input} />
       <FormValidationMessage>error message</FormValidationMessage>
-      <Text style={styles.title}>Anwser Card</Text>
+      <Text style={styles.title}>Card's Answer</Text>
       <View style={styles.inputWrapper}><FormInput /></View>
       <FormValidationMessage>error message</FormValidationMessage>
       <SubmitBtn text={'SUBMIT'} onPress={() => navigation.navigate('Home')} />
@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     marginBottom: 20
+  },
+  input: {
+    height: 40,
+    fontSize: 17,
+    borderWidth: 1,
+    width: 200
   }
 
 })

@@ -16,14 +16,23 @@ export default class Home extends React.Component {
     return (
       <ScrollView style={{flex:1}}>
 
-        {Object.keys(fetchDecksList).map((item) => {
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => navigation.navigate('Deck', { title: 'React Native' })}
+          >
+          <Text style={styles.deckTitle}>React Native</Text>
+          <Text style={styles.deckDescr}>4 cards</Text>
+        </TouchableOpacity>
+
+        {Object.keys(fetchDecksList).map((item, key) => {
           return (
             <TouchableOpacity
+              key={key}
               style={styles.item}
               onPress={() => navigation.navigate('Deck', { title: item.title })}
               >
               <Text style={styles.deckTitle}>{ item.title }</Text>
-              <Text style={styles.deckDescr}>{ item.questions.length }</Text>
+              <Text style={styles.deckDescr}>{ item.questions.length } cards</Text>
             </TouchableOpacity>
           )
         })}
