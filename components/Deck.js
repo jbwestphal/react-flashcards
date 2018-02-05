@@ -26,7 +26,7 @@ class Deck extends React.Component {
         </View>
         <View style={styles.deckFooter}>
           <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard')} />
-          <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('StartQuiz')} />
+          <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz')} />
         </View>
       </View>
     )

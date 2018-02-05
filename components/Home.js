@@ -1,27 +1,36 @@
 import React from 'react'
 import { View, ScrollView, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native'
 import { white, gray, purple } from '../utils/colors'
+import { fetchDecksList } from '../utils/_api'
 
-export default function Home({ navigation }) {
+export default class Home extends React.Component {
 
-  return (
-    <ScrollView style={{flex:1}}>
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() => navigation.navigate('Deck', { title: 'React Quiz' })}
-        >
-        <Text style={styles.deckTitle}>React Quiz</Text>
-        <Text style={styles.deckDescr}>5 cards</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() => navigation.navigate('Deck', { title: 'Redux Quiz' })}
-        >
-        <Text style={styles.deckTitle}>Redux Quiz</Text>
-        <Text style={styles.deckDescr}>3 cards</Text>
-      </TouchableOpacity>
-    </ScrollView>
-  )
+  state = {
+    ready: false,
+  }
+
+  render() {
+
+    const { navigation } = this.props
+
+    return (
+      <ScrollView style={{flex:1}}>
+
+        {Object.keys(fetchDecksList).map((item) => {
+          return (
+            <TouchableOpacity
+              style={styles.item}
+              onPress={() => navigation.navigate('Deck', { title: item.title })}
+              >
+              <Text style={styles.deckTitle}>{ item.title }</Text>
+              <Text style={styles.deckDescr}>{ item.questions.length }</Text>
+            </TouchableOpacity>
+          )
+        })}
+      </ScrollView>
+    )
+  }
+
 }
 
 const styles = StyleSheet.create({

@@ -13,7 +13,7 @@ import Home from './components/Home'
 import Deck from './components/Deck'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
-import StartQuiz from './components/StartQuiz'
+import Quiz from './components/Quiz'
 
 function CustomStatusBar ({backgroundColor, ...props}) {
   return (
@@ -81,8 +81,8 @@ const Nav = StackNavigator({
       }
     }
   },
-  StartQuiz: {
-    screen: StartQuiz,
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       title: 'Quiz',
       headerTintColor: white,

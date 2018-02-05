@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 
