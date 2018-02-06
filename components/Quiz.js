@@ -17,8 +17,8 @@ export default function Quiz({ navigation }) {
 const styles = StyleSheet.create({
   center: {
     flex: 1,
-    margin: 30,
-    justifyContent: 'space-between'
+    marginLeft: 30,
+    marginRight: 30,
   },
   pager: {
     fontSize: 18,

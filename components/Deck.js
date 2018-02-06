@@ -6,27 +6,28 @@ import SubmitBtn from './SubmitBtn'
 class Deck extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params
+    const { title, cards } = navigation.state.params
 
     return {
-      title: title
+      title: title,
+      cards: cards
     }
   }
 
   render() {
 
     const { navigation } = this.props
-    const { title } = navigation.state.params
+    const { title, cards } = navigation.state.params
 
     return (
       <View style={styles.deckWrapper}>
         <View style={styles.deckContent}>
-          <Text style={styles.deckTitle}>{ title }</Text>
-          <Text style={styles.deckQtdCards}>5 cards</Text>
+          <Text style={styles.deckTitle}>{title}</Text>
+          <Text style={styles.deckQtdCards}>{cards} card(s)</Text>
         </View>
         <View style={styles.deckFooter}>
-          <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard')} />
-          <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz')} />
+          <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard', { entryId: title })} />
+          <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title })} />
         </View>
       </View>
     )
