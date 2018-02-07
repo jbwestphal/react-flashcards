@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { FormInput, FormValidationMessage } from 'react-native-elements'
+import { NavigationActions } from 'react-navigation'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 import If from './If'
+import { fetchDecksList, submitNewDeck } from '../utils/_api'
 
 export default class AddDeck extends React.Component {
 
@@ -17,6 +19,10 @@ export default class AddDeck extends React.Component {
   }
 
   submitDeck = () => {
+
+    const { navigation } = this.props
+    const { text } = this.state
+
     if( this.state.text === '' ) {
       this.setState({
         showError: true
@@ -25,7 +31,21 @@ export default class AddDeck extends React.Component {
       this.setState({
         showError: false
       })
-      console.log(this.state.text)
+      console.log('text3: '+text)
+
+      let deckEntry = {
+        title: text,
+        questions: {}
+      }
+
+      fetchDecksList().then((result) => {
+        if( result !== undefined ) {
+          console.log(result)
+        }
+      });
+
+      submitNewDeck({ deckEntry })
+
     }
   }
 

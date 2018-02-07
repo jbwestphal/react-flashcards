@@ -16,8 +16,6 @@ export function getDeck({ key, entry }) {
   }))
 }
 
-export function submitNewDeck({ key, entry }) {
-  return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
-    [key]: entry
-  }))
+export function submitNewDeck({ entry }) {
+  return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(entry))
 }

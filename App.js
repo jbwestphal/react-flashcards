@@ -40,7 +40,11 @@ const TabsNav = TabNavigator({
   },
 }, {
   navigationOptions: {
-    header: null
+    title: 'FLASHCARDS',
+    headerTintColor: white,
+    headerStyle: {
+      backgroundColor: purple,
+    }
   },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? purple : white,
