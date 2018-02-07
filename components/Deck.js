@@ -3,14 +3,13 @@ import { View, Text, StyleSheet } from 'react-native'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 
-class Deck extends React.Component {
+export default class Deck extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
-    const { title, cards } = navigation.state.params
+    const { title } = navigation.state.params
 
     return {
-      title: title,
-      cards: cards
+      title: title
     }
   }
 
@@ -71,6 +70,3 @@ const styles = StyleSheet.create({
   }
 
 })
-
-
-export default Deck

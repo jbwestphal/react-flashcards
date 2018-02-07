@@ -4,18 +4,25 @@ import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 
-export default function AddCard({ navigation }) {
-  return (
-    <KeyboardAvoidingView behavior='padding' style={styles.center}>
-      <Text style={styles.title}>Card's Title</Text>
-      <TextInput style={styles.input} />
-      <FormValidationMessage>error message</FormValidationMessage>
-      <Text style={styles.title}>Card's Answer</Text>
-      <View style={styles.inputWrapper}><FormInput /></View>
-      <FormValidationMessage>error message</FormValidationMessage>
-      <SubmitBtn text={'SUBMIT'} onPress={() => navigation.navigate('Home')} />
-    </KeyboardAvoidingView>
-  )
+export default class AddCard extends React.Component {
+
+  render() {
+
+    const { navigation } = this.props
+    const { entryId } = navigation.state.params
+
+    return (
+      <KeyboardAvoidingView behavior='padding' style={styles.center}>
+        <Text style={styles.title}>Card's Title</Text>
+        <TextInput style={styles.input} />
+        <FormValidationMessage>error message</FormValidationMessage>
+        <Text style={styles.title}>Card's Answer</Text>
+        <View style={styles.inputWrapper}><FormInput /></View>
+        <FormValidationMessage>error message</FormValidationMessage>
+        <SubmitBtn text={'SUBMIT'} onPress={() => navigation.navigate('Home')} />
+      </KeyboardAvoidingView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
