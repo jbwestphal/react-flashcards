@@ -2,20 +2,19 @@ import React from 'react'
 import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
-import { gray } from '../utils/colors'
+// import { connect } from 'react-redux'
+
+import { fetchDecksList, submitNewDeck } from '../utils/_api'
+import { gray, green } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 import If from './If'
-import { fetchDecksList, submitNewDeck } from '../utils/_api'
 
-export default class AddDeck extends React.Component {
+class AddDeck extends React.Component {
 
   state = {
     showError: false,
+    showSuccess: false,
     text: ''
-  }
-
-  inputVal = () => {
-
   }
 
   submitDeck = () => {
@@ -38,13 +37,13 @@ export default class AddDeck extends React.Component {
         questions: {}
       }
 
-      fetchDecksList().then((result) => {
-        if( result !== undefined ) {
-          console.log(result)
-        }
-      });
+      // this.props.dispatch(addDeck({
+      //   deckEntry
+      // }))
 
       submitNewDeck({ deckEntry })
+      .then((result) => console.log(result))
+      .then((result) => this.setState({showSuccess: true}))
 
     }
   }
@@ -52,7 +51,7 @@ export default class AddDeck extends React.Component {
   render() {
 
     const { navigation } = this.props
-    const { showError } = this.state
+    const { showError, showSuccess } = this.state
 
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.center}>
@@ -62,6 +61,9 @@ export default class AddDeck extends React.Component {
         </View>
         <If test={ showError === true }>
           <FormValidationMessage labelStyle={styles.errorMsg}>Insert a title</FormValidationMessage>
+        </If>
+        <If test={ showSuccess === true }>
+          <FormValidationMessage labelStyle={styles.successMsg}>Deck created with success.</FormValidationMessage>
         </If>
         <SubmitBtn text={'SUBMIT'} onPress={this.submitDeck} />
       </KeyboardAvoidingView>
@@ -83,6 +85,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20
   },
+  successMsg: {
+    fontSize: 16,
+    marginBottom: 20,
+    color: green
+
+  },
   inputWrapper: {
     marginLeft: 0,
     marginRight: 0,
@@ -95,3 +103,9 @@ const styles = StyleSheet.create({
   }
 
 })
+
+// function mapStateToProps(state) {
+
+// }
+
+export default AddDeck

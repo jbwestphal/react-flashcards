@@ -1,13 +1,12 @@
 import React from 'react'
 import { View, Platform, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-// import { createStore } from 'redux'
 // import { Provider } from 'react-redux'
-// import reducer from './reducers'
+// import store from './store'
 
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
-import { white, purple } from './utils/colors'
+import { white, purple, lightPurp } from './utils/colors'
 
 import Home from './components/Home'
 import Deck from './components/Deck'
