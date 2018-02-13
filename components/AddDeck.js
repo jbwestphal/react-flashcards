@@ -30,11 +30,10 @@ class AddDeck extends React.Component {
       this.setState({
         showError: false
       })
-      console.log('text3: '+text)
 
       let deckEntry = {
         title: text,
-        questions: {}
+        questions: []
       }
 
       // this.props.dispatch(addDeck({
@@ -50,7 +49,6 @@ class AddDeck extends React.Component {
 
   render() {
 
-    const { navigation } = this.props
     const { showError, showSuccess } = this.state
 
     return (

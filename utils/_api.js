@@ -10,12 +10,10 @@ export function fetchDecksList() {
   return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
 }
 
-export function submitNewDeck({ entry }) {
-  return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(entry), () => {
-    AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY, (err, result) => {
-      console.log(result);
-    });
-  })
+export function submitNewDeck ({ entry, key }) {
+  return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
+    entry
+  }))
 }
 
 export function submitNewCard({ entry }) {

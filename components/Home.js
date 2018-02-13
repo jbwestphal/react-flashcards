@@ -4,7 +4,8 @@ import { View, ScrollView, Text, TouchableOpacity, Platform, StyleSheet, AsyncSt
 import { white, gray, purple } from '../utils/colors'
 import { setDecksList, fetchDecksList } from '../utils/_api'
 import If from './If'
-import { listDecks } from '../actions'
+import SubmitBtn from './SubmitBtn'
+// import { listDecks } from '../actions'
 
 class Home extends React.Component {
 
@@ -19,24 +20,17 @@ class Home extends React.Component {
 
     const { dispatch } = this.props
 
-    // fetchDecksList().then((result) => {
-    //   if( result === undefined ) {
-    //     setDecksList();
-    //   } else {
-    //     dispatch(listDecks(result))
-    //     // .then(() => this.setState(() => ({ready: true})))
-    //     // .then(() => console.log(listAllDecks))
-    //   }
-    // })
-
     fetchDecksList().then((result) => {
 
       if( result === undefined ) {
         setDecksList();
+        console.log('entrando undefined')
       } else {
         this.setState({
           data: JSON.parse(result)
         })
+
+        console.log('entrando data existente')
       }
 
     });
@@ -49,11 +43,13 @@ class Home extends React.Component {
     const { data, ready } = this.state
 
     return (
-      <ScrollView style={{flex:1}}>
+      <ScrollView style={{flex:1, marginTop: 30}}>
 
         <If test={ data === '' }>
 					<Text style={styles.headerTitle}>Loading...</Text>
 				</If>
+
+        <SubmitBtn text={'New Deck'} onPress={() => navigation.navigate('AddDeck')} />
 
         {data && data.map((item, key) => (
           <TouchableOpacity

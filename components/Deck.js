@@ -26,7 +26,7 @@ export default class Deck extends React.Component {
         </View>
         <View style={styles.deckFooter}>
           <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard', { entryId: title })} />
-          <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title })} />
+          <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title, cards })} />
         </View>
       </View>
     )
