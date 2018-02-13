@@ -24,7 +24,6 @@ export default class Quiz extends React.Component {
         this.setState({
           data: JSON.parse(result)
         })
-        // console.log(result)
       }
     })
 
@@ -73,20 +72,20 @@ export default class Quiz extends React.Component {
     return (
       <View style={styles.center}>
         <Text style={styles.pager}>{page+1}/{total}</Text>
-        {data && data.filter((item) => item.title === entryId).map((item, key) => (
+        {data && Object.keys(data).filter((item) => data[item]['title'] === entryId).map((item, key) => (
             <View key={key}>
               {
-                <View style={styles.deckContent} key={item.questions[page]}>
+                <View style={styles.deckContent} key={data[item]['questions'][page]}>
 
                   <If test={showQuestion === true && showAnswer === false}>
                     <View style={styles.question}>
-                      <Text style={styles.title}>{item.questions[page].question}</Text>
+                      <Text style={styles.title}>{data[item]['questions'][page]['question']}</Text>
                       <TouchableOpacity onPress={this.showAnswerCard}><Text style={styles.link}>Answer</Text></TouchableOpacity>
                     </View>
                   </If>
                   <If test={showAnswer === true}>
                     <View style={styles.answer}>
-                      <Text style={styles.title}>{item.questions[page].answer}</Text>
+                      <Text style={styles.title}>{data[item]['questions'][page]['answer']}</Text>
                       <View style={styles.cardFooter}>
                         <SubmitBtn onPress={this.submitCorrect} text={'CORRECT'} />
                         <SubmitBtn onPress={this.submitIncorrect} text={'INCORRECT'} />
@@ -95,27 +94,6 @@ export default class Quiz extends React.Component {
                   </If>
 
                 </View>
-                // item.questions.map((question, key) => (
-                //   <View style={styles.deckContent} key={key}>
-
-                //     <If test={showQuestion === true}>
-                //       <View style={styles.question}>
-                //         <Text style={styles.title}>{question.question}</Text>
-                //         <TouchableOpacity onPress={this.showAnswerCard}><Text style={styles.link}>Answer</Text></TouchableOpacity>
-                //       </View>
-                //     </If>
-                //     <If test={showAnswer === true}>
-                //       <View style={styles.answer}>
-                //         <Text style={styles.title}>{question.answer}</Text>
-                //         <View style={styles.cardFooter}>
-                //           <SubmitBtn text={'CORRECT'} />
-                //           <SubmitBtn text={'INCORRECT'} />
-                //         </View>
-                //       </View>
-                //     </If>
-
-                //   </View>
-                // ))
               }
             </View>
           ))

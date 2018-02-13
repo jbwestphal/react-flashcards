@@ -2,8 +2,6 @@ import React from 'react'
 import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
-// import { connect } from 'react-redux'
-
 import { fetchDecksList, submitNewDeck } from '../utils/_api'
 import { gray, green } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
@@ -14,15 +12,15 @@ class AddDeck extends React.Component {
   state = {
     showError: false,
     showSuccess: false,
-    text: ''
+    deck: ''
   }
 
   submitDeck = () => {
 
     const { navigation } = this.props
-    const { text } = this.state
+    const { deck } = this.state
 
-    if( this.state.text === '' ) {
+    if( deck === '' ) {
       this.setState({
         showError: true
       })
@@ -31,18 +29,20 @@ class AddDeck extends React.Component {
         showError: false
       })
 
-      let deckEntry = {
-        title: text,
+      let key = deck;
+
+      let entry = {
+        title: deck,
         questions: []
       }
 
-      // this.props.dispatch(addDeck({
-      //   deckEntry
-      // }))
-
-      submitNewDeck({ deckEntry })
-      .then((result) => console.log(result))
+      submitNewDeck(entry)
       .then((result) => this.setState({showSuccess: true}))
+      .then((result) => {
+        setTimeout(() => {
+          navigation.navigate('Home')
+        }, 200);
+      })
 
     }
   }
@@ -55,7 +55,7 @@ class AddDeck extends React.Component {
       <KeyboardAvoidingView behavior='padding' style={styles.center}>
         <Text style={styles.title}>Create a new Deck</Text>
         <View>
-          <FormInput containerStyle={styles.inputWrapper} inputStyle={styles.input} onChangeText={(text) => this.setState({text})} ref={input => this.input = input} />
+          <FormInput containerStyle={styles.inputWrapper} inputStyle={styles.input} onChangeText={(deck) => this.setState({deck})} ref={input => this.input = input} />
         </View>
         <If test={ showError === true }>
           <FormValidationMessage labelStyle={styles.errorMsg}>Insert a title</FormValidationMessage>
@@ -101,9 +101,5 @@ const styles = StyleSheet.create({
   }
 
 })
-
-// function mapStateToProps(state) {
-
-// }
 
 export default AddDeck

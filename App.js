@@ -1,8 +1,6 @@
 import React from 'react'
 import { View, Platform, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-// import { Provider } from 'react-redux'
-// import store from './store'
 
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'

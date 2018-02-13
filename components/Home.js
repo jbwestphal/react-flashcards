@@ -1,11 +1,9 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { View, ScrollView, Text, TouchableOpacity, Platform, StyleSheet, AsyncStorage } from 'react-native'
 import { white, gray, purple } from '../utils/colors'
 import { setDecksList, fetchDecksList } from '../utils/_api'
 import If from './If'
 import SubmitBtn from './SubmitBtn'
-// import { listDecks } from '../actions'
 
 class Home extends React.Component {
 
@@ -24,13 +22,10 @@ class Home extends React.Component {
 
       if( result === undefined ) {
         setDecksList();
-        console.log('entrando undefined')
       } else {
         this.setState({
           data: JSON.parse(result)
         })
-
-        console.log('entrando data existente')
       }
 
     });
@@ -43,7 +38,7 @@ class Home extends React.Component {
     const { data, ready } = this.state
 
     return (
-      <ScrollView style={{flex:1, marginTop: 30}}>
+      <ScrollView style={{flex:1, marginTop: 30, marginBottom: 30}}>
 
         <If test={ data === '' }>
 					<Text style={styles.headerTitle}>Loading...</Text>
@@ -51,16 +46,17 @@ class Home extends React.Component {
 
         <SubmitBtn text={'New Deck'} onPress={() => navigation.navigate('AddDeck')} />
 
-        {data && data.map((item, key) => (
+        {data && Object.keys(data).map((item, key) => (
+
           <TouchableOpacity
             key={key}
             style={styles.item}
-            onPress={() => navigation.navigate('Deck', { title: item.title, cards: item['questions'].length })}
+            onPress={() => navigation.navigate('Deck', { title: data[item]['title'], cards: data[item]['questions'].length })}
             >
-            <Text style={styles.deckTitle}>{ item.title }</Text>
-            <Text style={styles.deckDescr}>{item['questions'].length} card(s)</Text>
+            <Text style={styles.deckTitle}>{ data[item]['title'] }</Text>
+            <Text style={styles.deckDescr}>{data[item]['questions'].length} card(s)</Text>
           </TouchableOpacity>
-        ))}
+         ) )}
       </ScrollView>
     )
   }
@@ -101,10 +97,5 @@ const styles = StyleSheet.create({
     color: gray
   }
 })
-
-
-// const mapStateToProps = state => ({
-//   listAllDecks: state.entries
-// })
 
 export default Home
