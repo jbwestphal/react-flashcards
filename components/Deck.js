@@ -2,9 +2,15 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
+import { getDeck } from '../utils/_api'
 import If from './If'
 
 export default class Deck extends React.Component {
+
+  state = {
+    title: '',
+    questions: 0
+  }
 
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params
@@ -14,21 +20,32 @@ export default class Deck extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { title } = this.props.navigation.state.params
+
+    getDeck(title).then(data => {
+      this.setState({
+        title: data.title,
+        questions: data.questions.length,
+      })
+    })
+  }
+
   render() {
 
     const { navigation } = this.props
-    const { title, cards } = navigation.state.params
+    const { title, questions } = this.state
 
     return (
       <View style={styles.deckWrapper}>
         <View style={styles.deckContent}>
           <Text style={styles.deckTitle}>{title}</Text>
-          <Text style={styles.deckQtdCards}>{cards} card(s)</Text>
+          <Text style={styles.deckQtdCards}>{questions} card(s)</Text>
         </View>
         <View style={styles.deckFooter}>
-          <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard', { entryId: title, cards })} />
-          <If test={ cards !== 0 }>
-            <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title, cards })} />
+          <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard', { entryId: title, cards: questions })} />
+          <If test={ questions !== 0 }>
+            <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title, cards: questions })} />
           </If>
         </View>
       </View>

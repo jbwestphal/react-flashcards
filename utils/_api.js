@@ -16,6 +16,14 @@ export function submitNewDeck (entry) {
   }))
 }
 
+export function getDeck (title) {
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+    .then((results) => {
+      const decks = JSON.parse(results)
+      return decks[title]
+    })
+}
+
 export function submitNewCard (title, card) {
   return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
     .then((results) => {

@@ -40,7 +40,7 @@ class AddDeck extends React.Component {
       .then((result) => this.setState({showSuccess: true}))
       .then((result) => {
         setTimeout(() => {
-          navigation.navigate('Deck', { title: deck, cards: 0} )
+          navigation.navigate('Deck', { title: deck} )
         }, 200);
       })
 

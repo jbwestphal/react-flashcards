@@ -51,7 +51,7 @@ class Home extends React.Component {
           <TouchableOpacity
             key={key}
             style={styles.item}
-            onPress={() => navigation.navigate('Deck', { title: data[item]['title'], cards: data[item]['questions'].length })}
+            onPress={() => navigation.navigate('Deck', { title: data[item]['title'] })}
             >
             <Text style={styles.deckTitle}>{ data[item]['title'] }</Text>
             <Text style={styles.deckDescr}>{data[item]['questions'].length} card(s)</Text>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavigationActions } from 'react-navigation';
 import { View, Text, KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { submitNewCard } from '../utils/_api'
@@ -46,9 +47,13 @@ export default class AddCard extends React.Component {
       submitNewCard(entryId, card)
         .then((result) => {
           this.setState({showSuccess: true})
-          console.log(result)
           setTimeout(() => {
-            navigation.navigate('Deck', { title: entryId, cards })
+            navigation.dispatch(NavigationActions.reset({
+              index: 0,
+              actions: [
+                NavigationActions.navigate({ routeName: 'Home'})
+              ]
+            }));
           }, 200);
         })
     }
