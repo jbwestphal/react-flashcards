@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { gray, purple, orange } from '../utils/colors'
+import { gray, purple, orange, white } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 import { fetchDecksList } from '../utils/_api'
 import If from './If'
@@ -11,8 +11,10 @@ export default class Quiz extends React.Component {
     data: [],
     showQuestion: true,
     showAnswer: false,
+    showResult: false,
     page: 0,
-    total: 1
+    total: 1,
+    corrects: 0
   }
 
   componentDidMount() {
@@ -51,23 +53,42 @@ export default class Quiz extends React.Component {
       this.setState({
         showAnswer: false
       })
+    } else {
+      this.setState({
+        showResult: true,
+        showAnswer: false,
+        showQuestion: false,
+      })
     }
 
   }
 
   submitCorrect = () => {
     this.nextQuestion()
+
+    this.setState((prevState, props) => ({
+      corrects: prevState.corrects + 1
+    }))
   }
 
   submitIncorrect = () => {
     this.nextQuestion()
   }
 
+  restartQuiz = () => {
+    this.setState({
+      page: 0,
+      corrects: 0,
+      showResult: false,
+      showQuestion: true
+    })
+  }
+
   render() {
 
     const { navigation } = this.props
-    const { data, showQuestion, showAnswer, page, total } = this.state
-    const { entryId } = navigation.state.params
+    const { data, showQuestion, showAnswer, showResult, page, total, corrects } = this.state
+    const { entryId, cards } = navigation.state.params
 
     return (
       <View style={styles.center}>
@@ -78,17 +99,28 @@ export default class Quiz extends React.Component {
                 <View style={styles.deckContent} key={data[item]['questions'][page]}>
 
                   <If test={showQuestion === true && showAnswer === false}>
-                    <View style={styles.question}>
+                    <View>
                       <Text style={styles.title}>{data[item]['questions'][page]['question']}</Text>
                       <TouchableOpacity onPress={this.showAnswerCard}><Text style={styles.link}>Answer</Text></TouchableOpacity>
                     </View>
                   </If>
                   <If test={showAnswer === true}>
-                    <View style={styles.answer}>
+                    <View>
                       <Text style={styles.title}>{data[item]['questions'][page]['answer']}</Text>
                       <View style={styles.cardFooter}>
                         <SubmitBtn onPress={this.submitCorrect} text={'CORRECT'} />
                         <SubmitBtn onPress={this.submitIncorrect} text={'INCORRECT'} />
+                      </View>
+                    </View>
+                  </If>
+
+                  <If test={showResult === true}>
+                    <View>
+                      <Text style={styles.title}>Congrats! You finished the quiz!</Text>
+                      <Text style={styles.text}>Your score: { corrects } of { total }</Text>
+                      <View style={styles.cardFooter}>
+                        <SubmitBtn onPress={this.restartQuiz} text={'Restart Quiz'} />
+                        <SubmitBtn onPress={ () => navigation.goBack() } text={'Back to Deck'} />
                       </View>
                     </View>
                   </If>
@@ -120,6 +152,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center'
   },
+  text: {
+    fontSize: 19,
+    marginBottom: 10,
+    marginTop: 15,
+    textAlign: 'center',
+    color: orange
+  },
   link: {
     fontSize: 18,
     textAlign: 'center',
@@ -127,7 +166,9 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row'
   }
 })

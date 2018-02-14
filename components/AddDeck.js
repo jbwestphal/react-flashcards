@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
-import { fetchDecksList, submitNewDeck } from '../utils/_api'
+import { submitNewDeck } from '../utils/_api'
 import { gray, green } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 import If from './If'
@@ -40,7 +40,7 @@ class AddDeck extends React.Component {
       .then((result) => this.setState({showSuccess: true}))
       .then((result) => {
         setTimeout(() => {
-          navigation.navigate('Home')
+          navigation.navigate('Deck', { title: deck, cards: 0} )
         }, 200);
       })
 

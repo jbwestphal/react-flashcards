@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
+import If from './If'
 
 export default class Deck extends React.Component {
 
@@ -25,8 +26,10 @@ export default class Deck extends React.Component {
           <Text style={styles.deckQtdCards}>{cards} card(s)</Text>
         </View>
         <View style={styles.deckFooter}>
-          <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard', { entryId: title })} />
-          <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title, cards })} />
+          <SubmitBtn text={'Add Card'} onPress={() => navigation.navigate('AddCard', { entryId: title, cards })} />
+          <If test={ cards !== 0 }>
+            <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title, cards })} />
+          </If>
         </View>
       </View>
     )
@@ -59,7 +62,8 @@ const styles = StyleSheet.create({
   deckFooter: {
     flex: 1,
     flexDirection: 'row',
-    alignSelf: 'flex-end'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   center: {
     flex: 1,
