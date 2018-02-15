@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { clearLocalNotification, setLocalNotification } from '../utils/_helpers'
 import { gray, purple, orange, white } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 import { fetchDecksList } from '../utils/_api'
@@ -54,11 +55,14 @@ export default class Quiz extends React.Component {
         showAnswer: false
       })
     } else {
+
       this.setState({
         showResult: true,
         showAnswer: false,
         showQuestion: false,
       })
+
+      clearLocalNotification().then(setLocalNotification)
     }
 
   }

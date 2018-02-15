@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import { data } from './data'
-import { FLASHCARDS_STORAGE_KEY } from './_decks'
+import { FLASHCARDS_STORAGE_KEY } from './_helpers'
 
 export function setDecksList() {
   return AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
