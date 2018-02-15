@@ -49,9 +49,15 @@ export default class AddCard extends React.Component {
           this.setState({showSuccess: true})
           setTimeout(() => {
             navigation.dispatch(NavigationActions.reset({
-              index: 0,
+              index: 1,
               actions: [
-                NavigationActions.navigate({ routeName: 'Home'})
+                NavigationActions.navigate({ routeName: 'Home' }),
+                NavigationActions.navigate({
+                  routeName: 'Deck',
+                  params: {
+                    title: entryId
+                  }
+                })
               ]
             }));
           }, 200);

@@ -40,7 +40,18 @@ class AddDeck extends React.Component {
       .then((result) => this.setState({showSuccess: true}))
       .then((result) => {
         setTimeout(() => {
-          navigation.navigate('Deck', { title: deck} )
+          navigation.dispatch(NavigationActions.reset({
+            index: 1,
+            actions: [
+              NavigationActions.navigate({ routeName: 'Home' }),
+              NavigationActions.navigate({
+                routeName: 'Deck',
+                params: {
+                  title: deck
+                }
+              })
+            ]
+          }));
         }, 200);
       })
 
