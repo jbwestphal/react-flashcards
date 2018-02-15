@@ -33,12 +33,12 @@ export function submitNewCard (title, card) {
     })
 }
 
-export function deleteDeck (key) {
+export function deleteDeck (title) {
   return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
     .then((results) => {
-      const resultDecks = JSON.parse(results)
-      resultDecks[key] = undefined
-      delete resultDecks[key]
-      AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(resultDecks))
+      const decks = JSON.parse(results)
+      decks[title] = undefined
+      delete decks[title]
+      AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
     })
 }

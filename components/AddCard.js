@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions } from 'react-navigation'
 import { View, Text, KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import { FormInput, FormValidationMessage } from 'react-native-elements'
 import { submitNewCard } from '../utils/_api'

@@ -166,9 +166,11 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     flex: 1,
-    marginTop: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 40,
+    marginLeft: 30,
+    marginRight: 30,
   }
 })

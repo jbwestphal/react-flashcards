@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+import { getDeck, deleteDeck } from '../utils/_api'
 import { gray } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
-import { getDeck } from '../utils/_api'
 import If from './If'
 
 export default class Deck extends React.Component {
@@ -31,6 +32,21 @@ export default class Deck extends React.Component {
     })
   }
 
+  deleteThisDeck = () => {
+
+    const { navigation } = this.props
+    const { title } = navigation.state.params
+
+    deleteDeck(title).then(() => {
+      navigation.dispatch(NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ]
+      }));
+    })
+  }
+
   render() {
 
     const { navigation } = this.props
@@ -47,6 +63,9 @@ export default class Deck extends React.Component {
           <If test={ questions !== 0 }>
             <SubmitBtn text={'Start Quiz'} onPress={() => navigation.navigate('Quiz', { entryId: title, cards: questions })} />
           </If>
+        </View>
+        <View style={styles.deckFooter}>
+          <SubmitBtn text={'Delete Deck'} onPress={this.deleteThisDeck} />
         </View>
       </View>
     )
