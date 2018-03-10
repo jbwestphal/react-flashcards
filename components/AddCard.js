@@ -88,7 +88,7 @@ export default class AddCard extends React.Component {
           <FormValidationMessage labelStyle={styles.errorMsg}>Fill the required inputs</FormValidationMessage>
         </If>
         <If test={ showSuccess === true }>
-          <FormValidationMessage labelStyle={styles.successMsg}>Card added with succes.</FormValidationMessage>
+          <FormValidationMessage labelStyle={styles.successMsg}>Card added with success.</FormValidationMessage>
         </If>
 
         <SubmitBtn text={'SUBMIT'} onPress={this.submitNewCard} />
@@ -126,5 +126,4 @@ const styles = StyleSheet.create({
     height: 40,
     color: gray,
   }
-
 })

@@ -15,7 +15,6 @@ export default class Deck extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params
-
     return {
       title: title
     }
@@ -73,7 +72,6 @@ export default class Deck extends React.Component {
 }
 
 const styles = StyleSheet.create({
-
   deckWrapper: {
     flex: 1,
     padding: 20,
@@ -108,5 +106,4 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
   }
-
 })
